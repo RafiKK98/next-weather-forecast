@@ -2,11 +2,11 @@
 'use client'
 
 // import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Lexend } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 
-const inter = Inter({ subsets: ["latin"] });
+const lexend = Lexend({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
 //   title: "Create Next App",
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <title>Weather Forecast App || NextJs</title>
       <QueryClientProvider client={queryClient}>
-        <body className={inter.className}>{children}</body>
+        <body className={lexend.className}>{children}</body>
       </QueryClientProvider>
     </html>
   );

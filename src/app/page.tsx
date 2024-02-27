@@ -6,13 +6,13 @@ import ForecastWeatherDetail from "@/components/ForecastWeatherDetail";
 import Navbar from "@/components/Navbar";
 import WeatherDetails from "@/components/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
+import Footer from "@/components/Footer";
 import { convertKelvinToCelsius } from "@/utils/convertKelvinToCelsius";
 import { convertWindSpeed } from "@/utils/convertWindSpeed";
 import { getDayOrNightIcon } from "@/utils/getDayOrNightIcon";
 import { metersToKilometers } from "@/utils/metersToKilometers";
 import axios from "axios";
 import { format, fromUnixTime, parseISO } from "date-fns";
-import Image from "next/image";
 import { useQuery } from "react-query";
 import { loadingCityAtom, placeAtom } from "./atom";
 import { useAtom } from "jotai";
@@ -209,7 +209,7 @@ export default function Home() {
                 </Container>
                 <Container className="bg-yellow-300/80  px-6 gap-4 justify-between overflow-x-auto">
                   <WeatherDetails
-                    visability={metersToKilometers(
+                    visibility={metersToKilometers(
                       firstData?.visibility ?? 10000
                     )}
                     airPressure={`${firstData?.main.pressure} hPa`}
@@ -229,14 +229,14 @@ export default function Home() {
               </div>
             </section>
 
-            {/* 7 day forcast data  */}
+            {/* 7 day forecast data  */}
             <section className="flex w-full flex-col gap-4  ">
-              <p className="text-2xl">Forcast (7 days)</p>
+              <p className="text-2xl">Forecast (7 days)</p>
               {firstDataForEachDate.map((d, i) => (
                 <ForecastWeatherDetail
                   key={i}
                   description={d?.weather[0].description ?? ""}
-                  weatehrIcon={d?.weather[0].icon ?? "01d"}
+                  weatherIcon={d?.weather[0].icon ?? "01d"}
                   date={format(parseISO(d?.dt_txt ?? ""), "dd.MM")}
                   day={format(parseISO(d?.dt_txt ?? ""), "EEEE")}
                   feels_like={d?.main.feels_like ?? 0}
@@ -253,7 +253,7 @@ export default function Home() {
                     fromUnixTime(data?.city.sunset ?? 1702517657),
                     "H:mm"
                   )}
-                  visability={`${metersToKilometers(d?.visibility ?? 10000)} `}
+                  visibility={`${metersToKilometers(d?.visibility ?? 10000)} `}
                   windSpeed={`${convertWindSpeed(d?.wind.speed ?? 1.64)} `}
                 />
               ))}
@@ -261,6 +261,7 @@ export default function Home() {
           </>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
