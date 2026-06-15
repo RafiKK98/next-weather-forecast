@@ -1,22 +1,24 @@
 /** @format */
 
-import React from "react";
-import Image from "next/image";
 import { cn } from "@/utils/cn";
+import Image from "next/image";
+import { HTMLProps } from "react";
 
-type Props = {};
+type Props = HTMLProps<HTMLDivElement> & { iconName: string };
 
-export default function WeatherIcon(
-  props: React.HTMLProps<HTMLDivElement> & { iconName: string }
-) {
+export default function WeatherIcon({ iconName, className, ...rest }: Props) {
   return (
-    <div title={props.iconName} {...props} className={cn("relative h-20 w-20")}>
+    <div
+      {...rest}
+      title={iconName}
+      className={cn("relative w-20 h-20", className)}
+    >
       <Image
         width={100}
         height={100}
         alt="weather-icon"
-        className="absolute h-full w-full"
-        src={`https://openweathermap.org/img/wn/${props.iconName}@4x.png`}
+        className="absolute w-full h-full"
+        src={`https://openweathermap.org/img/wn/${iconName}@4x.png`}
       />
     </div>
   );
